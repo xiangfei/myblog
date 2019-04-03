@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: "want to fly"
+subtitle: "运维"
 description:
-keywords:
-author: John Doe
+keywords: ["openstack","opennebula"]
+author: 相飞
 language: zh-CN
 #- default
 timezone:
