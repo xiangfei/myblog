@@ -1,6 +1,7 @@
 ---
 title: opennebula高可用
 date: 2019-04-04 08:45:39
+author: 相飞
 tags:
 - opennebula
 categories:

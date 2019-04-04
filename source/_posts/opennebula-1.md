@@ -1,6 +1,7 @@
 ---
 title: opennebula安装
 date: 2019-04-03 18:29:38
+author: 相飞
 tags:
 - opennebula
 categories:
