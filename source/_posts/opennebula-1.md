@@ -13,7 +13,7 @@ categories:
 2. 存储 ceph
 3. 数据库 mysql
 4. 虚拟化 kvm
-5. 网络划分 192.168.0.0/16(业务)  10.1.0.0/16(存储)  管理网络使用业务网络
+5. 网络划分 192.168.0.0/16(业务) 
 
 #### 控制节点安装
 
@@ -77,7 +77,7 @@ systemctl start opennebula-sunstone
 systemctl enable opennebula-sunstone
 systemctl enable opennebula-sunstone
 ```
-#### 计算节点安装
+#### 计算节点安装(KVM)
 
 ip 192.168.20.3
 
@@ -116,9 +116,27 @@ scp -rp /var/lib/one/.ssh <node1>:/var/lib/one/
 yum -y install openvswitch
 systemctl enable openvswitch
 systemctl start openvswitch
-#临时方法
+#临时方法,重启网卡消失
+ovs-vsctl add-br br0
+ovs-vsctl add-port br0 eth0
+ifconfig br0 192.168.1.2/24 up
+ip route add default via 192.168.1.254
 
 ```
 >6. Storage Configuration
 
+```
+直接使用filesystem存储
+```
 >7. Adding a Host to OpenNebula
+
+```
+onehost create <node01> -i kvm -v kvm
+```
+
+>8. Import Currently Running VMs
+
+```
+instance不能以one-*开头
+one host importvm <hostid> <name>
+```
