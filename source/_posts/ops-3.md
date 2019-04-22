@@ -7,7 +7,8 @@ author: 相飞
 comments:
 - true
 categories:
-- mariadb , openstack
+- openstack
+- mariadb
 
 ---
 
@@ -116,7 +117,7 @@ systemctl daemon-reload
 启动
 # service mariadb start 
 
-/usr/libexec/mysqld  --user=root
+/usr/sbin/mysqld  --user=root
 
 查看
 show status like 'wsrep%';
