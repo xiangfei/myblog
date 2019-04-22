@@ -7,16 +7,16 @@ author: 相飞
 comments:
 - true
 categories:
-- mariadb
+- mariadb , openstack
 
 ---
 
 
 #### 准备
 
-+  192.168.213.83    controller1 controller1.open-stack.cn
-+  192.168.213.76    controller2 controller2.open-stack.cn
-+  192.168.213.34    controller3 controller3.open-stack.cn
++  192.168.224.181    controller1 
++  192.168.224.182   controller2 
++  192.168.224.183   controller3 
 
 #### yum 源
 
@@ -46,7 +46,7 @@ systemctl status mariadb
 ```
 
 #### 配置
-+ 192.168.213.83
++ 192.168.224.181
 
 ```
 vim /etc/my.cnf.d/server.cnf
@@ -62,7 +62,7 @@ binlog_format = ROW
 
 max_connections = 10000
 
-bind-address = 192.168.213.83
+bind-address = 192.168.224.181
 
 # Galera Cluster Configuration
 
@@ -70,11 +70,11 @@ wsrep_provider = /usr/lib64/galera/libgalera_smm.so
 
 wsrep_cluster_name = "OpenStack"
 
-wsrep_cluster_address = "gcomm://192.168.213.83,192.168.213.76,192.168.213.34"
+wsrep_cluster_address = "gcomm://192.168.224.182,192.168.224.181,192.168.224.183"
 
 wsrep_node_name = controller1
 
-wsrep_node_address = 192.168.213.83
+wsrep_node_address = 192.168.224.181
 
 wsrep_sst_method = rsync
 
@@ -104,7 +104,7 @@ systemctl daemon-reload
 
 启动
 
- /usr/libexec/mysqld --wsrep-new-cluster --user=root &
+ /usr/sbin/mysqld --wsrep-new-cluster --user=root &
 ```
 
 
@@ -114,8 +114,14 @@ systemctl daemon-reload
 拷贝机器  server.cnf文件 ,修改机器ip
 
 启动
-service mariadb start
+# service mariadb start 
+
+/usr/libexec/mysqld  --user=root
+
+查看
+show status like 'wsrep%';
+
+#集群size是不是3
+# | wsrep_incoming_addresses     | 192.168.17.132:3306,192.168.17.138:3306,192.168.17.151:3306
+
 ```
-
-
-
