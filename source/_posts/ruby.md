@@ -1,7 +1,7 @@
 ---
 title: ruby rvm 安装
 date: 2019-05-22 15:17:58
-tags: ops
+tags: ruby
 author: 相飞
 comments:
 - true
