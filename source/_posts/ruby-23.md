@@ -54,10 +54,9 @@ rescue
 end
 print file, "==", STDIN, "\n"
 ```
-以上实例运行输出结果为。您可以看到，STDIN 取代了 file ，因为打开失败。
-
+{% spoiler 以上实例输出结果为： %}
 `#<IO:0xb7d16f84>==#<IO:0xb7d16f84>`
-
+{%endspoiler%}
 #### 使用 retry 语句
 您可以使用 rescue 块捕获异常，然后使用 retry 语句从开头开始执行 begin 块。
 
@@ -137,12 +136,11 @@ end
 puts 'I am after the begin block.'
 ```
 
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >I am before the raise.  
 I am rescued.  
 I am after the begin block.  
-
+{%endspoiler%}
 另一个演示 raise 用法的实例：
 
 __实例__
@@ -156,11 +154,10 @@ rescue Exception => e
   puts e.backtrace.inspect  
 end
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >A test exception.
 ["main.rb:4"]
-
+{%endspoiler%}
 #### 使用 ensure 语句
 有时候，无论是否抛出异常，您需要保证一些处理在代码块结束时完成。例如，您可能在进入时打开了一个文件，当您退出块时，您需要确保关闭文件。
 
@@ -190,12 +187,11 @@ ensure
   puts "Ensuring execution"
 end
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > A test exception.
 ["main.rb:4"]
 Ensuring execution
-
+{%endspoiler%}
 #### 使用 else 语句
 如果提供了 else 子句，它一般是放置在 rescue 子句之后，任意 ensure 之前。
 
@@ -230,12 +226,11 @@ ensure
   puts "Ensuring execution"
 end
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > I'm not raising exception
 Congratulations-- no errors!
 Ensuring execution
-
+{%endspoiler%}
 使用 $! 变量可以捕获抛出的错误消息。
 
 #### Catch 和 Throw
@@ -283,13 +278,12 @@ catch :quitRequested do
 end
 promptAndGet("Name:")
 ```
-上面的程序需要人工交互，您可以在您的计算机上进行尝试。以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >Name: Ruby on Rails
 Age: 3
 Sex: !
 Name:Just Ruby
-
+{%endspoiler%}
 #### 类 Exception
 Ruby 的标准类和模块抛出异常。所有的异常类组成一个层次，包括顶部的 Exception 类在内。下一层是七种不同的类型：
 

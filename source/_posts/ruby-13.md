@@ -143,14 +143,13 @@ Week.weeks_in_month
 Week.weeks_in_year
 d1.no_of_months
 ```
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 >Sunday
 You have four weeks in a month
 You have 52 weeks in a year
 Sunday
 120
-
+{%endspoiler%}
 ### Ruby 中的 Mixins
 
 当一个类可以从多个父类继承类的特性时，该类显示为多重继承。

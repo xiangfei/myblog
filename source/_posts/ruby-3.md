@@ -97,11 +97,10 @@ puts 'escape using "\\"';
 puts 'That\'s right';
 ```
 
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > escape using "\"
 > That's right
-
+{%endspoiler%}
 您可以使用序列 #{ expr } 替换任意 Ruby 表达式的值为一个字符串。在这里，expr 可以是任意的 Ruby 表达式。
 
 #### 实例
@@ -111,10 +110,9 @@ puts 'That\'s right';
 puts "相乘 : #{24*60*60}";
 ```
 
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 相乘 : 86400
-
+{%endspoiler%}
 #### 实例
 ```
 #!/usr/bin/ruby -w
@@ -124,10 +122,10 @@ puts name
 puts "#{name+",ok"}"
 ```
 
-输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > Ruby
 > Ruby,ok
+{%endspoiler%}
 #### 反斜线符号
 下表列出了 Ruby 支持的反斜线符号：
 
@@ -165,14 +163,13 @@ ary.each do |i|
 end
 ```
 
-结果
-
+{% spoiler 以上实例输出结果为： %}
 > fred
 > 10
 > 3.14
 > This is a string
 > last element
-
+{%endspoiler%}
 #### 哈希类型
 - Ruby 哈希是在大括号内放置一系列键/值对，键和值之间使用逗号和序列 => 分隔。尾部的逗号会被忽略。
 
@@ -185,12 +182,11 @@ hsh.each do |key, value|
     print key, " is ", value, "\n"
 end
 ```
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > red is 3840
 > green is 240
 > blue is 15
-
+{%endspoiler%}
 #### 范围类型
 - 一个范围表示一个区间。
 
@@ -207,6 +203,6 @@ end
     print n, ' '
 end
 ```
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 10 11 12 13 14 15
+{%endspoiler%}

@@ -88,10 +88,10 @@ puts "盒子宽度 : #{x}"
 puts "盒子高度 : #{y}"
 
 ```
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 盒子宽度 : 10
 盒子高度 : 20
+{%endspoiler%}
 
 与用于访问变量值的访问器方法类似，Ruby 提供了一种在类的外部将参数传入类中已定义的变量，也就是所谓的设置器方法，定义如下：
 
@@ -138,10 +138,11 @@ puts "盒子宽度 : #{x}"
 puts "盒子高度 : #{y}"
 
 ```
-当上面的代码执行时，它会产生以下结果：
 
+{% spoiler 以上实例输出结果为： %}
 >盒子宽度 : 30
 盒子高度 : 50
+{%endspoiler%}
 
 `由于两种方法非常常用，Ruby 定义了 attr_accessor :variable_name、attr_reader :variable_name、attr_writer :variable_name 三种属性声明方法。其中：accessor=reader+writer。 同时注意：变量名前一定要带 : ，变量名之间要用 , 分割。`
 
@@ -172,9 +173,9 @@ a = box.getArea()
 puts "Area of the box is : #{a}"
 ```
 
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 >Area of the box is : 200
+{%endspoiler%}
 
 #### 类方法 & 类变量
 __类变量__是在类的所有实例中共享的变量。换句话说，类变量的实例可以被所有的对象实例访问。类变量以两个 @ 字符（@@）作为前缀，类变量必须在类定义中被初始化，如下面实例所示。
@@ -207,10 +208,9 @@ box2 = Box.new(30, 100)
 # 调用类方法来输出盒子计数
 Box.printCount()
 ```
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 >Box count is : 2
-
+{%endspoiler%}
 #### to_s 方法
 您定义的任何类都有一个 to_s 实例方法来返回对象的字符串表示形式。下面是一个简单的实例，根据 width 和 height 表示 Box 对象：
 
@@ -236,9 +236,9 @@ box = Box.new(10, 20)
 puts "String representation of box is : #{box}"
 ```
 
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > String representation of box is : (w:10,h:20)
+{%endspoiler%}
 
 #### 访问控制
 Ruby 为您提供了三个级别的实例方法保护，分别是 __public__、__private__ 或 __protected__。Ruby 不在实例和类变量上应用任何访问控制。
@@ -294,12 +294,12 @@ puts "Area of the box is : #{a}"
 # 尝试调用 protected 的实例方法
 box.printArea()
 ```
-当上面的代码执行时，它会产生以下结果。在这里，第一种方法调用成功，但是第二方法会产生一个问题。
 
+{% spoiler 以上实例输出结果为： %}
 Area of the box is : 200
 test.rb:42: protected method `printArea' called for #
 <Box:0xb7f11280 @height=20, @width=10> (NoMethodError)
-
+{%endspoiler%}
 #### 类的继承
 继承，是面向对象编程中最重要的概念之一。继承允许我们根据另一个类定义一个类，这样使得创建和维护应用程序变得更加容易。
 
@@ -341,10 +341,9 @@ box = BigBox.new(10, 20)
 # 输出面积
 box.printArea()
 ```
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > Big box area is : 200
-
+{%endspoiler%}
 #### 方法重载
 虽然您可以在派生类中添加新的功能，但有时您可能想要改变已经在父类中定义的方法的行为。这时您可以保持方法名称不变，重载方法的功能即可，如下面实例所示：
 
@@ -381,10 +380,9 @@ box = BigBox.new(10, 20)
 box.getArea()
 ```
 
-> 以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 Big box area is : 200
-
+{%endspoiler%}
 #### 运算符重载
 我们希望使用 + 运算符执行两个 Box 对象的向量加法，使用 * 运算符来把 Box 的 width 和 height 相乘，使用一元运算符 - 对 Box 的 width 和 height 求反。下面是一个带有数学运算符定义的 Box 类版本：
 ```
@@ -462,12 +460,11 @@ puts "Width of the box is : #{x}"
 puts "Height of the box is : #{y}"
 ```
 
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 Box object is frozen object
 test.rb:20:in `setWidth=': can't modify frozen object (TypeError)
         from test.rb:39
-
+{%endspoiler%}
 #### 类常量
 您可以在类的内部定义一个常量，通过把一个直接的数值或字符串值赋给一个变量来定义的，常量的定义不需要使用 @ 或 @@。按照惯例，常量的名称使用大写。
 
@@ -501,12 +498,11 @@ puts Box::BOX_COMPANY
 puts "Box weight is: #{Box::BOXWEIGHT}"
 ```
 
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 >Area of the box is : 200
 TATA Inc
 Box weight is: 10
-
+{%endspoiler%}
 类常量可被继承，也可像实例方法一样被重载。
 
 #### 使用 allocate 创建对象
@@ -546,14 +542,13 @@ a = box2.getArea()
 puts "Area of the box is : #{a}"
 ```
 
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 >Area of the box is : 200
 test.rb:14: warning: instance variable @width not initialized
 test.rb:14: warning: instance variable @height not initialized
 test.rb:14:in `getArea': undefined method `*' 
    for nil:NilClass (NoMethodError) from test.rb:29
-
+{%endspoiler%}
 #### 类信息
 Ruby的 self 和 Java 的 this 有相似之处，但又大不相同。Java的方法都是在实例方法中引用，所以this一般都是指向当前对象的。而Ruby的代码逐行执行，所以在不同的上下文(context)self就有了不同的含义。让我们来看看下面的实例：.
 
@@ -567,7 +562,7 @@ class Box
    puts "Name of self = #{self.name}"
 end
 ```
-当上面的代码执行时，它会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > Class of self = Class
 Name of self = Box
+{% endspoiler%}

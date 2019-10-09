@@ -41,10 +41,9 @@ if ( line2 =~ /Cats(.*)/ )
   puts "Line2 contains  Dogs"
 end
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >Line1 contains Cats
-
+{%endspoiler%}
 #### 正则表达式修饰符
 正则表达式从字面上看可能包含一个可选的修饰符，用于控制各方面的匹配。修饰符在第二个斜杠字符后指定，如上面实例所示。下标列出了 可能的修饰符：
 
@@ -235,11 +234,10 @@ puts "电话号码 : #{phone}"
 phone = phone.gsub!(/\D/, "")    
 puts "电话号码 : #{phone}"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >电话号码 : 138-3453-1111 
 电话号码 : 13834531111
-
+{%endspoiler%}
 __实例__
 ```
 #!/usr/bin/ruby
@@ -256,6 +254,6 @@ text.gsub!(/\brails\b/, "Rails")
 puts "#{text}"
 
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >Rails 是 Rails,  Ruby on Rails 非常好的 Ruby 框架
+{%endspoiler%}

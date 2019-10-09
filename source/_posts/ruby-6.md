@@ -49,12 +49,12 @@ class1obj.print_global
 class2obj = Class2.new
 class2obj.print_global
 ```
-在这里，$global_variable 是全局变量。这将产生以下结果：
-
+在这里，$global_variable 是全局变量。
+{% spoiler 以上实例输出结果为： %}
 > 注意：在 Ruby 中，您可以通过在变量或常量前面放置 # 字符，来访问任何变量或常量的值。
 > 全局变量在 Class1 中输出为 10
 > 全局变量在 Class2 中输出为 10
-
+{%endspoiler%}
 #### Ruby 实例变量
 - 实例变量以 @ 开头。未初始化的实例变量的值为 nil，在使用 -w 选项后，会产生警告。
 
@@ -84,15 +84,15 @@ cust1.display_details()
 cust2.display_details()
 ```
 
-在这里，@cust_id、@cust_name 和 @cust_addr 是实例变量。这将产生以下结果：
-
+在这里，@cust_id、@cust_name 和 @cust_addr 是实例变量
+{% spoiler 以上实例输出结果为： %}
 > Customer id 1
 > Customer name John
 > Customer address Wisdom Apartments, Ludhiya
 > Customer id 2
 > Customer name Poul
 > Customer address New Empire road, Khandala
-
+{%endspoiler%}
 #### Ruby 类变量
 - 类变量以 @@ 开头，且必须初始化后才能在方法定义中使用。
 
@@ -131,11 +131,11 @@ cust1.total_no_of_customers()
 cust2.total_no_of_customers()
 ```
 
-在这里，@@no_of_customers 是类变量。这将产生以下结果：
-
+在这里，@@no_of_customers 是类变量。
+{% spoiler 以上实例输出结果为： %}
 > Total number of customers: 1
 > Total number of customers: 2
-
+{%endspoiler%}
 #### Ruby 局部变量
 - 局部变量以小写字母或下划线 _ 开头。局部变量的作用域从 class、module、def 或 do 到相对应的结尾或者从左大括号到右大括号 {}。
 
@@ -168,11 +168,11 @@ object=Example.new()
 object.show
 ```
 
-在这里，VAR1 和 VAR2 是常量。这将产生以下结果：
-
+在这里，VAR1 和 VAR2 是常量
+{% spoiler 以上实例输出结果为： %}
 > 第一个常量的值为 100
 > 第二个常量的值为 200
-
+{%endspoiler%}
 #### Ruby 伪变量
 - 它们是特殊的变量，有着局部变量的外观，但行为却像常量。您不能给这些变量赋任何值。
 

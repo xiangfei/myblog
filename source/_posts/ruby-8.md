@@ -20,10 +20,9 @@ categories:
  
 puts "Hello, Ruby!"
 ```
-当执行时，上面的程序会产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > Hello, Ruby!
-
+{%endspoiler%}
 #### Ruby 多行注释
 您可以使用 =begin 和 =end 语法注释多行，如下所示：
 
@@ -39,11 +38,9 @@ puts "Hello, Ruby!"
 但 =begin 和 =end 只能出现在第一行和最后一行。 
 =end
 ```
-
-当执行时，上面的程序会产生以下结果：
-```
+{% spoiler 以上实例输出结果为： %}
 Hello, Ruby!
-```
+{%endspoiler%}
 请确保尾部的注释离代码有足够的距离，以便容易区分注释和代码。如果尾部超过一条注释，请将它们对齐。例如：
 
 实例

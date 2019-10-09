@@ -145,6 +145,8 @@ wordCount:
   min2read: true
   totalCount: true
 
+
+
 # Whether to activate the 'love' effect of clicking on the page.
 # 是否激活点击页面的'爱心'效果，默认激活.
 clicklove:
@@ -295,6 +297,14 @@ busuanziStatistics:
 googleAnalytics:
   enable: false
   id:
+
+slidehtml: 
+  titleMerge: true
+  horizontalSeparator: '^\\n---\\n'
+  verticalSeparator: '^\\n--\\n'
+
+plugins:
+ - hexo-sliding-spoiler
 
 # The used front-end library can be replaced with the corresponding CDN address as needed,
 # If the specific version is not specified below, you can use the latest version.

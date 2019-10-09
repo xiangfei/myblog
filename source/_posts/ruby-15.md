@@ -37,11 +37,10 @@ names = Array.new(20)
 puts names.size  # 返回 20
 puts names.length # 返回 20
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >20
 20
-
+{%endspoiler%}
 您可以给数组中的每个元素赋值，如下所示：
 
 __实例__
@@ -52,10 +51,9 @@ names = Array.new(4, "mac")
  
 puts "#{names}"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >["mac", "mac", "mac", "mac"]
-
+{%endspoiler%}
 您也可以使用带有 new 的块，每个元素使用块中的计算结果来填充：
 
 __实例__
@@ -66,10 +64,9 @@ nums = Array.new(10) { |e| e = e * 2 }
  
 puts "#{nums}"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
-
+{%endspoiler%}
 数组还有另一种方法，[]，如下所示：
 ```
 nums = Array.[](1, 2, 3, 4,5)
@@ -88,8 +85,9 @@ digits = Array(0..9)
  
 puts "#{digits}"
 ```
-
+{% spoiler 以上实例输出结果为： %}
 > [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+{%endspoiler%}
 #### 数组内建方法
 
 我们需要有一个 Array 对象的实例来调用 Array 方法。下面是创建 Array 对象实例的方式：
@@ -109,9 +107,9 @@ num = digits.at(6)
 puts "#{num}"
 ```
 以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > 6
-
+{%endspoiler%}
 下面是公共的数组方法（假设 array 是一个 Array 对象）：
 
 |序号|	方法 | 描述|

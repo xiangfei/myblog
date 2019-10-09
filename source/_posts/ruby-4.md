@@ -150,11 +150,12 @@ class Sample
    end
 end
  ```
-# 使用上面的类来创建对象
+使用上面的类来创建对象
 ```
 object = Sample. new
 object.hello
 ```
-这将会产生下面的结果：
-
+{% spoiler 以上实例输出结果为： %}
 > Hello Ruby!
+
+{%endspoiler%}

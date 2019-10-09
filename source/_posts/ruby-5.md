@@ -109,10 +109,10 @@ cust2.total_no_of_customers()
 
 运行程序，如下所示：
 
-> $ ruby main.rb
-
-这将产生以下结果：
-
+```
+$ ruby main.rb
+```
+{% spoiler 以上实例输出结果为： %}
 > Customer id 1
 > Customer name John
 > Customer address Wisdom Apartments, Ludhiya
@@ -121,3 +121,4 @@ cust2.total_no_of_customers()
 > Customer name Poul
 > Customer address New Empire road, Khandala
 > Total number of customers: 2
+{%endspoiler%}

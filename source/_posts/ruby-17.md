@@ -34,11 +34,10 @@ time2 = Time.now
 puts "当前时间 : " + time2.inspect
 ```
 
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >当前时间 : 2015-09-17 15:23:14 +0800
 当前时间 : 2015-09-17 15:23:14 +0800
-
+{%endspoiler%}
 #### 获取 Date & Time 组件
 我们可以使用 Time 对象来获取各种日期和时间的组件。请看下面的实例：
 
@@ -63,8 +62,7 @@ puts time.usec    # => 999999：微秒
 puts time.zone    # => "UTC"：时区名称
 ```
 
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >当前时间 : 2015-09-17 15:24:44 +0800
 2015
 9
@@ -76,7 +74,7 @@ puts time.zone    # => "UTC"：时区名称
 44
 921519
 CST
-
+{%endspoiler%}
 #### Time.utc、Time.gm 和 Time.local 函数
 这些函数可用于格式化标准格式的日期，如下所示：
 ```
@@ -105,10 +103,9 @@ time = Time.new
 values = time.to_a
 p values
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > [39, 25, 15, 17, 9, 2015, 4, 260, false, "CST"]
-
+{%endspoiler%}
 该数组可被传到 Time.utc 或 Time.local 函数来获取日期的不同格式，如下所示：
 
 __实例__
@@ -120,10 +117,10 @@ time = Time.new
 values = time.to_a
 puts Time.utc(*values)
 ```
-以上实例运行输出结果为：
 
+{% spoiler 以上实例输出结果为： %}
 > 2015-09-17 15:26:09 UTC
-
+{%endspoiler%}
 下面是获取时间的方式，从纪元以来的秒数（平台相关）：
 ```
 # 返回从纪元以来的秒数
@@ -166,13 +163,12 @@ puts time.ctime
 puts time.localtime
 puts time.strftime("%Y-%m-%d %H:%M:%S")
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >2015-09-17 15:26:42 +0800
 Thu Sep 17 15:26:42 2015
 2015-09-17 15:26:42 +0800
 2015-09-17 15:26:42
-
+{%endspoiler%}
 #### 时间格式化指令
 下表所列出的指令与方法 Time.strftime 一起使用。
 
@@ -216,9 +212,10 @@ puts future
 diff = future - now      # => 10  Time - Time => 秒数
 puts diff
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >2015-09-17 15:27:08 +0800
 2015-09-17 15:26:58 +0800
 2015-09-17 15:27:18 +0800
 10.0
+
+{%endspoiler%}

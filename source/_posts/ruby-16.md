@@ -42,11 +42,10 @@ months = Hash.new( "month" )
 puts "#{months[0]}"
 puts "#{months[72]}"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >month
 month
-
+{%endspoiler%}
 __实例__
 ```
 #!/usr/bin/ruby
@@ -56,11 +55,10 @@ H = Hash["a" => 100, "b" => 200]
 puts "#{H['a']}"
 puts "#{H['b']}"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >100
 200
-
+{%endspoiler%}
 您可以使用任何的 Ruby 对象作为键或值，甚至可以使用数组，如下实例所示：
 ```
 [1,"jan"] => "January"
@@ -90,10 +88,10 @@ keys = months.keys
  
 puts "#{keys}"
 ```
-以上实例运行输出结果为：
 
+{% spoiler 以上实例输出结果为： %}
 > ["1", "2"]
-
+{%endspoiler%}
 下面是公共的哈希方法（假设 hash 是一个 Hash 对象）：
 
 |序号	|方法 |  描述|

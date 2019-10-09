@@ -32,11 +32,10 @@ val2 = "This is variable two"
 puts val1
 puts val2
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >This is variable one
 This is variable two
-
+{%endspoiler%}
 #### gets 语句
 gets 语句可用于获取来自名为 STDIN 的标准屏幕的用户输入。
 
@@ -51,12 +50,11 @@ puts "Enter a value :"
 val = gets
 puts val
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >Enter a value :
 This is entered value
 This is entered value
-
+{%endspoiler%}
 #### putc 语句
 与 puts 语句不同，puts 语句输出整个字符串到屏幕上，而 putc 语句可用于依次输出一个字符。
 
@@ -69,9 +67,9 @@ __实例__
 str="Hello Ruby!"
 putc str
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 >H
+{%endspoiler%}
 #### print 语句
 print 语句与 puts 语句类似。唯一的不同在于 puts 语句在输出内容后会跳到下一行，而使用 print 语句时，光标定位在同一行。
 
@@ -82,10 +80,9 @@ __实例__
 print "Hello World"
 print "Good Morning"
 ```
-以上实例运行输出结果为：
-
+{% spoiler 以上实例输出结果为： %}
 > Hello WorldGood Morning
-
+{%endspoiler%}
 #### 打开和关闭文件
 截至现在，您已经读取并写入标准输入和输出。现在，我们将看看如何操作实际的数据文件。
 
@@ -179,7 +176,7 @@ end
 
 字符一个接着一个被传到变量 ch，然后显示在屏幕上，如下所示：
 
-> A.B.C.D.E.F.s. .a. .s.i.m.p.l.e. .t.e.x.t. .f.i.l.e. .f.o.r. .t.e.s.t.i.n.g. .p.u.r.p.o.s.e...
+`A.B.C.D.E.F.s. .a. .s.i.m.p.l.e. .t.e.x.t. .f.i.l.e. .f.o.r. .t.e.s.t.i.n.g. .p.u.r.p.o.s.e...`
 
 #### IO.readlines 方法
 类 File 是类 IO 的一个子类。类 IO 也有一些用于操作文件的方法。

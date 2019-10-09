@@ -20,12 +20,12 @@ puts "Hello, Ruby!";
 ```
 
 在这里，假设您的 /usr/bin 目录下已经有可用的 Ruby 解释器。现在，尝试运行这个程序，如下所示：
-
+```
 > $ ruby test.rb
-
-这将会产生下面的结果：
+```
+{% spoiler 以上实例输出结果为： %}
 > Hello, Ruby!
-
+{%endspoiler%}
 您已经看到了一个简单的 Ruby 程序，现在让我们看看一些 Ruby 语法相关的基本概念：
 
 ### Ruby 程序中的空白
@@ -96,8 +96,7 @@ foo
 bar
 ```
 
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 这是第一种方式创建here document 。
 > 多行字符串。
 > 这是第二种方式创建here document 。
@@ -106,7 +105,7 @@ bar
 > lo there
 > I said foo.
 > I said bar.
-
+{%endspoiler%}
 ### Ruby BEGIN 语句
 #### 语法
 ```
@@ -128,10 +127,11 @@ BEGIN {
 }
 ```
 
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 初始化 Ruby 程序
 > 这是主 Ruby 程序
+
+{%endspoiler%}
 ### Ruby END 语句
 #### 语法
 ```
@@ -156,13 +156,12 @@ BEGIN {
 }
 ```
 
-这将产生以下结果：
-
+{% spoiler 以上实例输出结果为： %}
 > 初始化 Ruby 程序
 > 这是主 Ruby 程序
 > 停止 Ruby 程序
 > Ruby 注释
-
+{%endspoiler%}
 ### 注释会对 Ruby 
 - 解释器隐藏一行，或者一行的一部分，或者若干行。您可以在行首使用字符（ # ）：
 ```
