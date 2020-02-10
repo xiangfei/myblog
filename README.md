@@ -1,5 +1,7 @@
+
 # README
 
+* npm install
 * hexo server
 * hexo new  ruby_traing
 
