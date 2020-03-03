@@ -24,12 +24,11 @@ B --> C[Server01]
 B --> D[Server02]
 
 ```
-<div class="mermaid" >
+
+{% mermaid %}
  graph LR
       A --- B
       B-->C[fa:fa-ban forbidden]
       B-->D(fa:fa-spinner);
 
-</div>
-
-
+{% endmermaid %}

@@ -307,7 +307,7 @@ slidehtml:
 
 plugins:
  - hexo-sliding-spoiler
-
+ - hexo-tag-mermaid
 # The used front-end library can be replaced with the corresponding CDN address as needed,
 # If the specific version is not specified below, you can use the latest version.
 # 使用到的前端库，可按需替换成对应的CDN地址，如果下面未指定具体的版本号，使用最新的版本即可.
@@ -323,7 +323,7 @@ libs:
     gitalk: /libs/gitalk/gitalk.css
     jqcloud: /libs/jqcloud/jqcloud.css
     tocbot: /libs/tocbot/tocbot.css
-    mermaid: /libs/mermaid/mermaid.css
+    mermaid: /libs/mermaid/mermaid.min.css
   js:
     jquery: /libs/jquery/jquery-2.2.0.min.js
     materialize: /libs/materialize/materialize.min.js # 1.0.0

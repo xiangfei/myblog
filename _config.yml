@@ -69,7 +69,14 @@ permalink_pinyin:
   enable: true
   separator: '-' # default: '-'
 
+
+# add plugins
+hexo-tag-mermaid:
+  enable: true
+
 #atom plugin
+
+
 
 feed:
   type: atom
