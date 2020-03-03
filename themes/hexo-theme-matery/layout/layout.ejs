@@ -16,6 +16,50 @@
 <script src="<%- theme.libs.js.aos %>"></script>
 <script src="<%- theme.libs.js.scrollProgress %>"></script>
 <script src="<%- theme.libs.js.lightgallery %>"></script>
+<script src="<%- theme.libs.js.mermaid %>"></script>
+<!--script>mermaid.initialize({startOnLoad:true});</script -->
+
+  <script>
+    mermaid.initialize({
+      theme: 'forest',
+      // themeCSS: '.node rect { fill: red; }',
+      logLevel: 3,
+      securityLevel: 'loose',
+      flowchart: { curve: 'basis' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 },
+      // sequenceDiagram: { actorMargin: 300 } // deprecated
+    });
+  </script>
+
+ <script>
+    function ganttTestClick(a, b, c){
+      console.log("a:", a)
+      console.log("b:", b)
+      console.log("c:", c)
+    }
+    function testClick(nodeId) {
+      console.log("clicked", nodeId)
+      var originalBgColor = document.querySelector('body').style.backgroundColor
+      document.querySelector('body').style.backgroundColor = 'yellow'
+      setTimeout(function() {
+        document.querySelector('body').style.backgroundColor = originalBgColor
+      }, 100)
+    }
+  </script>
+  <script>
+     const testLineEndings = (test, input) => {
+       try {
+         mermaid.render(test, input, () => {});
+       } catch (err) {
+         console.error("Error in %s:\n\n%s", test, err);
+       }
+     };
+
+     testLineEndings("CR", "graph LR\rsubgraph CR\rA --> B\rend");
+     testLineEndings("LF", "graph LR\nsubgraph LF\nA --> B\nend");
+     testLineEndings("CRLF", "graph LR\r\nsubgraph CRLF\r\nA --> B\r\nend");
+  </script>
 <script src="/js/matery.js"></script>
 
 <%- partial('_partial/google-analytics') %>
