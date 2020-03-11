@@ -74,9 +74,17 @@ permalink_pinyin:
 hexo-tag-mermaid:
   enable: true
 
+# markdown it
+
+markdown: 'default'
+
 #atom plugin
 
-
+admin:
+    name: admin
+    password: admin
+    secret: hey hexo
+    expire: 60*1
 
 feed:
   type: atom
