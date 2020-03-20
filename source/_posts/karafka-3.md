@@ -15,4 +15,4 @@ categories:
 ####  Error sending heartbeat: Kafka::UnknownMemberId
 
 
-
+- 通常是代码问题导致发送心跳失败
