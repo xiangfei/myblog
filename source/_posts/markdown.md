@@ -18,11 +18,12 @@ categories:
 
 
 ```mermaid
+{% mermaid %}
 graph TD
 A[Client] --> B[Load Balancer]
 B --> C[Server01]
 B --> D[Server02]
-
+{% endmermaid %}
 ```
 
 {% mermaid %}
