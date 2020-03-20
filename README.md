@@ -14,7 +14,7 @@
 
 ## 新增集成插件
 
-- 画图插件
+- 画图插件 mermaid
 
 ```ruby
 {% mermaid %}
@@ -27,4 +27,14 @@ B --> D[Server02]
 
 ```
 
+## 新增UML插件
+
+- plantuml
+
+```ruby
+{% plantuml %}
+    Bob->Alice : hello
+{% endplantuml %}
+
+```
 

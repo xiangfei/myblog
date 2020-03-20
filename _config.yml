@@ -74,6 +74,9 @@ permalink_pinyin:
 hexo-tag-mermaid:
   enable: true
 
+tag_plantuml:
+  type: static
+
 # markdown it
 
 markdown: 'default'
