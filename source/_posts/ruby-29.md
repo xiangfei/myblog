@@ -28,6 +28,31 @@ reason ruby 申请的内存不会释放,需要自己去解决
 2. 线程换成进程处理
 
 
+```ruby
+require 'timeout'
+
+servers.each do |server|
+    pid = fork do
+        puts "Forking #{server}."
+        output = "doing stuff here"
+        puts output
+    end
+
+    begin
+        Timeout.timeout(20) do
+            Process.wait
+        end
+    rescue Timeout::Error
+        Process.kill 9, pid
+        # collect status so it doesn't stick around as zombie process
+        Process.wait pid
+    end
+    puts "#{server} child exited, pid = #{pid}"
+end
+
+```
+
+
 
 
 
