@@ -361,5 +361,52 @@ Chassis "b2ed9734-2f21-4fac-b8de-8abf0a265186"
 
 ## 说明
 
-- ovn远程配置的是vip
+- ovn远程配置的是vip 
 - ovsdb vip 是master , controller ip slave ,配置ovsdb server 同步
+
+
+
+
+## ovn cluster 配置
+
+
+
+```bash
+[root@controller01 ~]# /usr/share/openvswitch/scripts/ovn-ctl --db-nb-addr=192.168.151.71  --db-nb-create-insecure-remote=yes         --db-sb-addr=192.168.151.71 --db-sb-create-insecure-remote=yes --db-nb-cluster-local-addr=192.168.151.71         --db-sb-cluster-local-addr=192.168.151.71         --ovn-northd-nb-db=tcp:192.168.151.71:6641,tcp:192.168.151.72:6641,tcp:192.168.151.73:6641         --ovn-northd-sb-db=tcp:192.168.151.71:6642,tcp:192.168.151.72:6642,tcp:192.168.151.73:6642         start_northd
+
+[root@controller02 ml2]# /usr/share/openvswitch/scripts/ovn-ctl --db-nb-addr=192.168.151.72           --db-nb-create-insecure-remote=yes           --db-nb-cluster-local-addr=192.168.151.72           --db-sb-addr=192.168.151.72           --db-sb-create-insecure-remote=yes           --db-sb-cluster-local-addr=192.168.151.72           --db-nb-cluster-remote-addr=192.168.151.71           --db-sb-cluster-remote-addr=192.168.151.71           --ovn-northd-nb-db=tcp:192.168.151.71:6641,tcp:192.168.151.72:6641,tcp:192.168.151.73:6641           --ovn-northd-sb-db=tcp:192.168.151.71:6642,tcp:192.168.151.72:6642,tcp:192.168.151.73:6642           start_northd
+
+
+[root@controller03 ~]# /usr/share/openvswitch/scripts/ovn-ctl --db-nb-addr=192.168.151.73           --db-nb-create-insecure-remote=yes           --db-nb-cluster-local-addr=192.168.151.73           --db-sb-addr=192.168.151.73           --db-sb-create-insecure-remote=yes           --db-sb-cluster-local-addr=192.168.151.73           --db-nb-cluster-remote-addr=192.168.151.71           --db-sb-cluster-remote-addr=192.168.151.71           --ovn-northd-nb-db=tcp:192.168.151.71:6641,tcp:192.168.151.72:6641,tcp:192.168.151.73:6641           --ovn-northd-sb-db=tcp:192.168.151.71:6642,tcp:192.168.151.72:6642,tcp:192.168.151.73:6642           start_northd
+
+
+#neutron config
+[ovn]
+#ovn_nb_connection = tcp:192.168.151.170:6641
+#ovn_sb_connection = tcp:192.168.151.170:6642
+ovn_nb_connection = tcp:192.168.151.71:6641,tcp:192.168.151.72:6641,tcp:192.168.151.73:6641
+ovn_sb_connection = tcp:192.168.151.71:6642,tcp:192.168.151.72:6642,tcp:192.168.151.73:6642
+ovn_l3_scheduler = leastloaded
+
+
+
+
+[root@compute01 ~]# ovs-vsctl set open . external-ids:ovn-remote=tcp:192.168.151.71:6642,tcp:192.168.151.72:6642,tcp:192.168.151.73:6642
+
+# ss 监听71 6642 port 如果 71 6642 down 会开始监听 72 6642
+
+```
+
+## ovn master slave 配置
+
+```bash
+
+[root@controller01 ~]# /usr/share/openvswitch/scripts/ovn-ctl  start_northd     --db-sb-sync-from-addr=192.168.151.170     --db-nb-sync-from-addr=192.168.151.170  --db-sb-create-insecure-remote=yes  --db-nb-create-insecure-remote=yes
+
+[root@controller03 ~]# /usr/share/openvswitch/scripts/ovn-ctl  start_northd     --db-sb-sync-from-addr=192.168.151.170     --db-nb-sync-from-addr=192.168.151.170  --db-sb-create-insecure-remote=yes  --db-nb-create-insecure-remote=yes
+
+[root@controller02 ~]# /usr/share/openvswitch/scripts/ovn-ctl  start_northd     --db-sb-sync-from-addr=192.168.151.170     --db-nb-sync-from-addr=192.168.151.170  --db-sb-create-insecure-remote=yes  --db-nb-create-insecure-remote=yes
+
+
+# 配置换成 floating ip 
+```
