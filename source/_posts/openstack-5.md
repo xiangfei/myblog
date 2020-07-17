@@ -185,7 +185,7 @@ Cluster status of node rabbit@controller01
 
 
 
-## 以后service restart rabbitmq-server
+## 以后service  rabbitmq-server restart
 ```
 
 ### 创建用户,配置权限
