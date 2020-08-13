@@ -12,6 +12,9 @@
 * hexo g
 
 
+## hexo deploy 插件
+- nodejs 不能最新(10.16.0)
+
 ## 新增集成插件
 
 - 画图插件 mermaid
