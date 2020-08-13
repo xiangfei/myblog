@@ -56,9 +56,8 @@ export HBASE_MANAGES_ZK=false
 ```
 - 修改hbase-site.xml 文件
 
-
-```xml
-&ltconfiguration&gt
+```
+<configuration>
   <!--
     The following properties are set for running HBase as a single process on a
     developer workstation. With this configuration, HBase is running in
@@ -99,7 +98,6 @@ export HBASE_MANAGES_ZK=false
     <value>false</value>
   </property>
 </configuration>
-
 
 ```
 

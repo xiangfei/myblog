@@ -172,7 +172,7 @@ export HDFS_ZKFC_USER=root
 
  - 修改core-site.xml
 
-```bash
+```
 [root@hadoop-cluster-3 hadoop-3.3.0]# cat ./etc/hadoop/core-site.xml 
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -213,7 +213,7 @@ export HDFS_ZKFC_USER=root
 ```
  - 修改hdfs-site.xml 
 
-```bash
+```
 [root@hadoop-cluster-3 hadoop-3.3.0]# cat ./etc/hadoop/hdfs-site.xml 
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
@@ -440,7 +440,7 @@ About to bootstrap Standby ID nn3 from:
  - 配置yarn(all cluster nodes)
   - resourcemanager 
  
-```bash
+```
 #参考官方最小化配置
 [root@hadoop-cluster-2 hadoop-3.3.0]# cat etc/hadoop/yarn-site.xml 
 <?xml version="1.0"?>
