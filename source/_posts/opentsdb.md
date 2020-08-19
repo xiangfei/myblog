@@ -1,7 +1,16 @@
 ---
-title: opentsdb
+title: opentsdb 2.4.0 集群安装
 date: 2020-08-14 08:40:51
+author: 相飞
+comments:
+- true
 tags:
+- opentsdb
+- bigdata
+categories:
+- opentsdb
+- bigdata
+
 ---
 
 
@@ -222,7 +231,7 @@ nohup tsdb  tsd  --config=/etc/opentsdb/opentsdb.conf    2>&1 >/dev/null &
 #### 测试
  - 任意一台机器插入, 其他2台机器都能获取到数据
 
->
+>  缺少图片
 
 
 

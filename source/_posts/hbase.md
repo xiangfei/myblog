@@ -119,6 +119,17 @@ export HBASE_MANAGES_ZK=false
 nohup ./hbase rest start -p 4444 2>&1 >/dev/null&
 
 ```
+
+- 启动thrift2
+
+```bash
+[root@hadoop-cluster-2 bin]# cat restart_thrift.sh
+nohup ./hbase thrift2  start -p 9090 2>&1 >/dev/null&
+
+
+
+```
+
 > all cluster node 启动
 
 #### data node
