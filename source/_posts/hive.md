@@ -149,6 +149,15 @@ export HIVE_AUX_JARS_PATH=/data/tools/apache-hive-3.1.2-bin/lib
 
 ```
 
+### 初始化数据
+
+
+```
+[root@hadoop-cluster-1 apache-hive-3.1.2-bin]# ./schematool -dbType mysql -initSchema
+
+```
+
+
 ### 启动hiveserver2
 
 
@@ -235,4 +244,219 @@ Hive Session ID = edac1d17-208b-4a6e-b79e-af51f84a2d29
 
 ```
 
+
+- 初始化提示mysql jar包 找不到
+
+```
+[root@hadoop-cluster-1 bin]# ./schematool -dbType mysql -initSchema
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/data/tools/apache-hive-3.1.2-bin/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/data/tools/hadoop-3.3.0/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Metastore connection URL:	 jdbc:mysql://192.168.213.59:3306/hive
+Metastore Connection Driver :	 com.mysql.jdbc.Driver
+Metastore connection User:	 root
+org.apache.hadoop.hive.metastore.HiveMetaException: Failed to load driver
+Underlying cause: java.lang.ClassNotFoundException : com.mysql.jdbc.Driver
+Use --verbose for detailed stacktrace.
+*** schemaTool failed ***
+
+```
+
+> 下载 java connector(mysql-connector-java-8.0.21.jar) 放到lib 目录 ,maven repo 下载
+
+
+- 连接hive 报错
+
+```
+Beeline version 3.1.2 by Apache Hive
+beeline> 
+beeline> 
+beeline> !connect jdbc:hive2://192.168.226.64:9090
+Connecting to jdbc:hive2://192.168.226.64:9090
+Enter username for jdbc:hive2://192.168.226.64:9090: root
+Enter password for jdbc:hive2://192.168.226.64:9090: ******
+20/08/20 06:43:44 [main]: WARN jdbc.HiveConnection: Failed to connect to 192.168.226.64:9090
+Error: Could not open client transport with JDBC Uri: jdbc:hive2://192.168.226.64:9090: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate root (state=08S01,code=0)
+beeline> exit
+
+```
+ 修改 hadoop core-site.xml 文件(需要重启)  改动没效果 
+
+```
+[root@hadoop-cluster-1 hadoop-3.3.0]# cat  etc/hadoop/core-site.xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://mycluster</value>
+    </property>
+
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/data/tools/hadoop-3.3.0/tmp</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>hadoop-cluster-1:2181,hadoop-cluster-2:2181,hadoop-cluster-3:2181</value>
+    </property>
+     <property>
+         <name>hadoop.proxyuser.root.hosts</name>
+         <value>*</value>
+     </property>
+
+    <property>
+         <name>hadoop.proxyuser.root.groups</name>
+         <value>*</value>
+    </property>
+</configuration>
+
+```
+
+
+修改 hive-site.xml 文件
+```
+[root@hadoop-cluster-1 bin]# cat  ../conf/hive-site.xml 
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+ <property>
+  <name>hive.server2.enable.doAs</name>
+  <value>false</value> 
+  </property>
+</configuration>
+
+```
+
+
+- too many connections
+
+```
+Unexpected end of file when reading from HS2 server. The root cause might be too many concurrent connections. Please ask the administrator to check the number of active connections, and adjust hive.server2.thrift.max.worker.threads if applicable
+```
+> 如果启动Hbase thrift server2 需要关闭
+
+
+- 找不到 org.apache.tez.dag.api.SessionNotRunning
+
+
+```
+2020-08-20T07:34:23,932  INFO [main] server.HiveServer2: Stopped tez session pool manager.
+2020-08-20T07:34:23,932  WARN [main] server.HiveServer2: Error starting HiveServer2 on attempt 1, will retry in 60000ms
+java.lang.NoClassDefFoundError: org/apache/tez/dag/api/SessionNotRunning
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionPoolSession$AbstractTriggerValidator.startTriggerValidator(TezSessionPoolSession.java:74) ~[hive-exec-3.1.2.jar:3.1.2]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionPoolManager.initTriggers(TezSessionPoolManager.java:207) ~[hive-exec-3.1.2.jar:3.1.2]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionPoolManager.startPool(TezSessionPoolManager.java:114) ~[hive-exec-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.initAndStartTezSessionPoolManager(HiveServer2.java:839) ~[hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.startOrReconnectTezSessions(HiveServer2.java:822) ~[hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.start(HiveServer2.java:745) ~[hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.startHiveServer2(HiveServer2.java:1037) [hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.access$1600(HiveServer2.java:140) [hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2$StartOptionExecutor.execute(HiveServer2.java:1305) [hive-service-3.1.2.jar:3.1.2]
+	at org.apache.hive.service.server.HiveServer2.main(HiveServer2.java:1149) [hive-service-3.1.2.jar:3.1.2]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_262]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_262]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_262]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_262]
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323) [hadoop-common-3.3.0.jar:?]
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236) [hadoop-common-3.3.0.jar:?]
+Caused by: java.lang.ClassNotFoundException: org.apache.tez.dag.api.SessionNotRunning
+
+```
+
+> 需要安装apache-tez ,或者禁用 HS2交互式HA配置
+
+```
+<property>
+    <name>hive.server2.active.passive.ha.enable</name>
+    <value>true</value> # change false to true
+</property>
+
+```
+
+
+
+### 说明
+
 > 配置galera cluster ,其他2 台机器连接自己的thrift2 server 和数据库配置
+
+
+
+```
+2020-08-20T07:50:28,229  INFO [main] service.AbstractService: Service:HiveServer2 is started.
+2020-08-20T07:50:28,230  WARN [main] server.HiveServer2: No policy provider found, skip creating PrivilegeSynchonizer
+2020-08-20T07:50:28,232  INFO [main] server.Server: jetty-9.3.20.v20170531
+2020-08-20T07:50:28,411  INFO [main] handler.ContextHandler: Started o.e.j.w.WebAppContext@30036a18{/,file:///tmp/jetty-0.0.0.0-10002-hiveserver2-_-any-7344828647128270757.dir/webapp/,AVAILABLE}{jar:file:/data/tools/apache-hive-3.1.2-bin/lib/hive-service-3.1.2.jar!/hive-webapps/hiveserver2}
+2020-08-20T07:50:28,413  INFO [main] handler.ContextHandler: Started o.e.j.s.ServletContextHandler@537b3b2e{/static,jar:file:/data/tools/apache-hive-3.1.2-bin/lib/hive-service-3.1.2.jar!/hive-webapps/static,AVAILABLE}
+2020-08-20T07:50:28,415  INFO [main] handler.ContextHandler: Started o.e.j.s.ServletContextHandler@1544ded3{/logs,file:///tmp/root/,AVAILABLE}
+2020-08-20T07:50:28,427  INFO [main] server.AbstractConnector: Started ServerConnector@305b43ca{HTTP/1.1,[http/1.1]}{0.0.0.0:10002}
+2020-08-20T07:50:28,427  INFO [main] server.HiveServer2: Web UI has started on port 10002
+2020-08-20T07:50:28,427  INFO [main] server.HiveServer2: HS2 interactive HA enabled. Tez sessions will be started/reconnected by the leader.
+2020-08-20T07:50:28,427  INFO [main] server.Server: Started @14561ms
+2020-08-20T07:50:28,427  INFO [main] http.HttpServer: Started HttpServer[hiveserver2] on port 10002
+
+
+```
+
+- 连接数据
+
+```
+[root@hadoop-cluster-1 bin]# ./beeline 
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/data/tools/apache-hive-3.1.2-bin/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/data/tools/hadoop-3.3.0/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/data/tools/apache-hive-3.1.2-bin/lib/log4j-slf4j-impl-2.10.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/data/tools/hadoop-3.3.0/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Beeline version 3.1.2 by Apache Hive
+beeline> !connect jdbc:hive2://192.168.212.157:9090
+Connecting to jdbc:hive2://192.168.212.157:9090
+Enter username for jdbc:hive2://192.168.212.157:9090: root
+Enter password for jdbc:hive2://192.168.212.157:9090: ******
+Connected to: Apache Hive (version 3.1.2)
+Driver: Hive JDBC (version 3.1.2)
+Transaction isolation: TRANSACTION_REPEATABLE_READ
+0: jdbc:hive2://192.168.212.157:9090> 
+0: jdbc:hive2://192.168.212.157:9090> show databases;
+INFO  : Compiling command(queryId=root_20200820075115_b23ea40f-c23c-4eb4-b116-c9726837f61f): show databases
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Semantic Analysis Completed (retrial = false)
+INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:database_name, type:string, comment:from deserializer)], properties:null)
+INFO  : Completed compiling command(queryId=root_20200820075115_b23ea40f-c23c-4eb4-b116-c9726837f61f); Time taken: 1.406 seconds
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Executing command(queryId=root_20200820075115_b23ea40f-c23c-4eb4-b116-c9726837f61f): show databases
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=root_20200820075115_b23ea40f-c23c-4eb4-b116-c9726837f61f); Time taken: 0.104 seconds
+INFO  : OK
+INFO  : Concurrency mode is disabled, not creating a lock manager
++----------------+
+| database_name  |
++----------------+
+| default        |
++----------------+
+1 row selected (2.168 seconds)
+0: jdbc:hive2://192.168.212.157:9090> exit
+
+``` 

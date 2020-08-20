@@ -494,3 +494,11 @@ Stderr: u'ovs-vsctl: tcp:127.0.0.1:6640: database connection failed (Connection 
 [root@compute01 ~]# ovs-appctl -t ovsdb-server ovsdb-server/add-remote ptcp:6640:0.0.0.0
  
 ```
+
+> overcommit
+
+
+```
+root@controller01:~# nova aggregate-set-metadata node108  cpu_allocation_ratio=16.0 
+
+```
