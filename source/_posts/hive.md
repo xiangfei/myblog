@@ -121,7 +121,7 @@ mkdir: `hdfs://mycluster/user/hive': No such file or directory
 	</property>
 	<property>
        		 <name>hive.server2.thrift.port</name>
-     		 <value>9090</value>
+     		 <value>10000</value>
 	</property>
 
     	<property>
@@ -273,12 +273,12 @@ Use --verbose for detailed stacktrace.
 Beeline version 3.1.2 by Apache Hive
 beeline> 
 beeline> 
-beeline> !connect jdbc:hive2://192.168.226.64:9090
-Connecting to jdbc:hive2://192.168.226.64:9090
-Enter username for jdbc:hive2://192.168.226.64:9090: root
-Enter password for jdbc:hive2://192.168.226.64:9090: ******
-20/08/20 06:43:44 [main]: WARN jdbc.HiveConnection: Failed to connect to 192.168.226.64:9090
-Error: Could not open client transport with JDBC Uri: jdbc:hive2://192.168.226.64:9090: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate root (state=08S01,code=0)
+beeline> !connect jdbc:hive2://192.168.226.64:10000
+Connecting to jdbc:hive2://192.168.226.64:10000
+Enter username for jdbc:hive2://192.168.226.64:10000: root
+Enter password for jdbc:hive2://192.168.226.64:10000: ******
+20/08/20 06:43:44 [main]: WARN jdbc.HiveConnection: Failed to connect to 192.168.226.64:10000
+Error: Could not open client transport with JDBC Uri: jdbc:hive2://192.168.226.64:10000: Failed to open new session: java.lang.RuntimeException: org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.authorize.AuthorizationException): User: root is not allowed to impersonate root (state=08S01,code=0)
 beeline> exit
 
 ```
@@ -392,6 +392,17 @@ Caused by: java.lang.ClassNotFoundException: org.apache.tez.dag.api.SessionNotRu
 
 ```
 
+- mapred 失败
+ - 替换tez 或者spark
+
+```
+INFO  : Executing command(queryId=root_20200824075830_35100282-b95f-4c20-bb7d-c90cb11dec8c): select * from hbase_machine_resource_usage  order  by  cpuusage   limit 1
+WARN  : Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+....
+Error: Error while processing statement: FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask (state=08S01,code=2)
+0: jdbc:hive2://192.168.212.213:9090> select * from hbase_machine_resource_usage  order  by  cpuusage  desc  limit 1;
+
+```
 
 
 ### 说明
@@ -458,5 +469,24 @@ INFO  : Concurrency mode is disabled, not creating a lock manager
 +----------------+
 1 row selected (2.168 seconds)
 0: jdbc:hive2://192.168.212.157:9090> exit
+
+
+
+0: jdbc:hive2://hadoop-cluster-2:9090> create external table hbase_machine_resource_usage(id string, ip string, cpuusage float , memoryusage float) STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' WITH SERDEPROPERTIES ("hbase.columns.mapping" = ":key,base:ip,base:cpuusage,base:memoryusage") TBLPROPERTIES("hbase.table.name" = "hbase_machine_resource_usage") ;
+INFO  : Compiling command(queryId=root_20200824074725_74ad8cf7-0532-4a9c-a945-9b3f85c4667b): create external table hbase_machine_resource_usage(id string, ip string, cpuusage float , memoryusage float) STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' WITH SERDEPROPERTIES ("hbase.columns.mapping" = ":key,base:ip,base:cpuusage,base:memoryusage") TBLPROPERTIES("hbase.table.name" = "hbase_machine_resource_usage")
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Semantic Analysis Completed (retrial = false)
+INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)
+INFO  : Completed compiling command(queryId=root_20200824074725_74ad8cf7-0532-4a9c-a945-9b3f85c4667b); Time taken: 0.275 seconds
+INFO  : Concurrency mode is disabled, not creating a lock manager
+INFO  : Executing command(queryId=root_20200824074725_74ad8cf7-0532-4a9c-a945-9b3f85c4667b): create external table hbase_machine_resource_usage(id string, ip string, cpuusage float , memoryusage float) STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler' WITH SERDEPROPERTIES ("hbase.columns.mapping" = ":key,base:ip,base:cpuusage,base:memoryusage") TBLPROPERTIES("hbase.table.name" = "hbase_machine_resource_usage")
+INFO  : Starting task [Stage-0:DDL] in serial mode
+INFO  : Completed executing command(queryId=root_20200824074725_74ad8cf7-0532-4a9c-a945-9b3f85c4667b); Time taken: 4.29 seconds
+INFO  : OK
+INFO  : Concurrency mode is disabled, not creating a lock manager
+No rows affected (4.588 seconds)
+0: jdbc:hive2://hadoop-cluster-2:10000> 
+
+
 
 ``` 
